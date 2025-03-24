@@ -2,5 +2,7 @@ package interfaces;
 
 public interface ImpactoAmbiental {
 
-   String  calcularImpacto();
+    void calcularImpacto( int arvoresPlantadas, double reducaoCo2);
+
 }
+

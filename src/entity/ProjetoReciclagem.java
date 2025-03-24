@@ -1,32 +1,32 @@
 package entity;
 
-import java.util.ArrayList;
+public class ProjetoReciclagem extends ProjetoSustentavel {
+    private double toneladasRecicladas;
 
-public class ProjetoReciclagem extends ProjetoSustentavel{
-    Double toneladasRecicladas;
+    public ProjetoReciclagem() {
+    }
 
-    ProjetoReciclagem(){}
-
-    public ProjetoReciclagem(Double toneladasRecicladas) {
+    public ProjetoReciclagem(String nome, String descricao, double toneladasRecicladas) {
+        super(nome, descricao);
         this.toneladasRecicladas = toneladasRecicladas;
     }
 
-    public ProjetoReciclagem(String descricao, String nome, String relatorioImpacto, ArrayList<Voluntario> voluntarios, Double toneladasRecicladas) {
-        super(descricao, nome, relatorioImpacto, voluntarios);
-        this.toneladasRecicladas = toneladasRecicladas;
-    }
-
-    public Double getToneladasRecicladas() {
+    public double getToneladasRecicladas() {
         return toneladasRecicladas;
     }
 
-    public void setToneladasRecicladas(Double toneladasRecicladas) {
+    public void setToneladasRecicladas(double toneladasRecicladas) {
         this.toneladasRecicladas = toneladasRecicladas;
     }
 
     @Override
-    public String toString() {
-        return "ProjetoReciclagem{" +
-                "toneladasRecicladas=" + toneladasRecicladas + ", voluntarios=" + voluntarios + '}';
+    public void calcularImpacto( int arvoresPlantadas, double reducaoCo2) {
+        reducaoCo2 = toneladasRecicladas * 0.5;
+        getRelatorioImpacto().setArvoresPlantadas(arvoresPlantadas);
+        getRelatorioImpacto().setReducaoCo2(reducaoCo2);
+        System.out.println("Impacto do Projeto de Reciclagem");
+        System.out.println("Impacto: " + toneladasRecicladas + " toneladas recicladas");
+        System.out.println("Arvores Plantadas: " + arvoresPlantadas);
+        System.out.println("Redução de CO2: " + reducaoCo2 + " toneladas");
     }
 }

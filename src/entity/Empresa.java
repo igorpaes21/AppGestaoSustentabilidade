@@ -1,19 +1,19 @@
 package entity;
 
-import java.util.ArrayList;
-
-public class Empresa extends Oraganizaçao{
+public class Empresa extends Organizacao {
     private String cnpj;
 
-   public Empresa(){}
+    public Empresa() {
+        super();
+    }
 
-    public Empresa(String cnpj) {
+    public Empresa(String nome, String cnpj) {
+        super(nome);
         this.cnpj = cnpj;
     }
 
-    public Empresa(ArrayList<ProjetoSustentavel> listaProjetos, String nome, String cnpj) {
-        super(listaProjetos, nome);
-        this.cnpj = cnpj;
+    public Empresa(String nomeEspresa) {
+        super(nomeEspresa);
     }
 
     public String getCnpj() {
@@ -26,6 +26,26 @@ public class Empresa extends Oraganizaçao{
 
     @Override
     public String toString() {
-        return "Empresa{" + "cnpj='" + cnpj + '\'' + '}';
+        StringBuilder sb = new StringBuilder();
+        sb.append("Empresa{");
+        sb.append("nome=").append(getNome()).append('\'');
+        sb.append(", cnpj=").append(cnpj).append('\'');
+        sb.append(", listaProjetos=").append(getListaProjetos());
+        if (getListaProjetos() != null) {
+            for (int i = 0; i < getListaProjetos().size(); i++) {
+                ProjetoSustentavel projeto = getListaProjetos().get(i);
+                sb.append("ProjetoSustentavel{");
+                sb.append("nome = ").append(projeto.getNome()).append('\'');
+                sb.append(", descricao = ").append(projeto.getDescricao()).append('\'');
+                sb.append(", RelatorioImpacto = ").append(projeto.getRelatorioImpacto()).append('\'');
+                sb.append('}');
+                if (i < getListaProjetos().size() - 1) {
+                    sb.append(", ");
+                }
+
+            }
+        }
+        sb.append('}');
+        return sb.toString();
     }
 }

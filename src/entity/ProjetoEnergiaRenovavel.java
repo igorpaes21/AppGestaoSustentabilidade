@@ -1,30 +1,45 @@
 package entity;
 
+import interfaces.ImpactoAmbiental;
+
 import java.util.ArrayList;
 
-public class ProjetoEnergiaRenovavel extends ProjetoSustentavel {
-    Double energiaGerada;
+public class ProjetoEnergiaRenovavel extends ProjetoSustentavel{
+    private double energiaGerada;
 
-    ProjetoEnergiaRenovavel(){}
-    public ProjetoEnergiaRenovavel(Double energiaGerada) {
-        this.energiaGerada = energiaGerada;
-    }
-    public ProjetoEnergiaRenovavel(String descricao, String nome, String relatorioImpacto, ArrayList<Voluntario> voluntarios, Double energiaGerada) {
-        super(descricao, nome, relatorioImpacto, voluntarios);
-        this.energiaGerada = energiaGerada;
+   public ProjetoEnergiaRenovavel(){
     }
 
-    public Double getEnergiaGerada() {
+    public ProjetoEnergiaRenovavel(String  nome, String  descricao, Double energiaGerada) {
+        super(nome, descricao);
+        this.energiaGerada = energiaGerada;
+    }
+
+    public ProjetoEnergiaRenovavel(String descricao, double energiaGerada) {
+        super();
+        setDescricao(descricao);
+        setNome(nome);
+        this.energiaGerada = energiaGerada;
+    }
+
+    public double getEnergiaGerada() {
         return energiaGerada;
     }
 
-    public void setEnergiaGerada(Double energiaGerada) {
+    public void setEnergiaGerada(double energiaGerada) {
         this.energiaGerada = energiaGerada;
     }
 
     @Override
-    public String toString() {
-        return "ProjetoEnergiaRenovavel{" +
-                "energiaGerada=" + energiaGerada + ", voluntarios=" + voluntarios + '}';
+    public void calcularImpacto( int arvoresPlantadas, double reducaoCo2) {
+        reducaoCo2 = energiaGerada * 0.5;
+        getRelatorioImpacto().setArvoresPlantadas(arvoresPlantadas);
+        getRelatorioImpacto().setReducaoCo2(reducaoCo2);
+        System.out.println("Impacto do Projeto de Energia Renovável");
+        System.out.println("Impacto: " + energiaGerada + " KWh de energia gerada");
+        System.out.println("Arvores Plantadas: " + arvoresPlantadas);
+        System.out.println("Redução de CO2: " + reducaoCo2 + " toneladas");
+
     }
+
 }

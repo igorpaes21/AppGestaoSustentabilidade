@@ -3,16 +3,12 @@ package entity;
 import java.util.ArrayList;
 
 public class ProjetoReflorestamento extends ProjetoSustentavel{
-    int arvoresPlantadas;
+   private int arvoresPlantadas;
 
-    public ProjetoReflorestamento(){}
+    public ProjetoReflorestamento() {}
 
-    public ProjetoReflorestamento(int arvoresPlantadas) {
-        this.arvoresPlantadas = arvoresPlantadas;
-    }
-
-    public ProjetoReflorestamento(String descricao, String nome, String relatorioImpacto, ArrayList<Voluntario> voluntarios, int arvoresPlantadas) {
-        super(descricao, nome, relatorioImpacto, voluntarios);
+    public ProjetoReflorestamento(String nome, String descricao, int arvoresPlantadas) {
+        super(nome, descricao);
         this.arvoresPlantadas = arvoresPlantadas;
     }
 
@@ -25,8 +21,16 @@ public class ProjetoReflorestamento extends ProjetoSustentavel{
     }
 
     @Override
-    public String toString() {
-        return "ProjetoReflorestamento{" +
-                "arvoresPlantadas=" + arvoresPlantadas + ", voluntarios=" + voluntarios + '}';
+    public void calcularImpacto( int arvoresPlantadas, double reducaoCo2) {
+        reducaoCo2 = arvoresPlantadas * 0.5;
+        gerarRelatorioImpacto().setArvoresPlantadas(arvoresPlantadas);
+        gerarRelatorioImpacto().setReducaoCo2(reducaoCo2);
+        System.out.println("Impacto do Projeto de Reflorestamento");
+        System.out.println("Impacto: " + arvoresPlantadas + " árvores plantadas");
+        System.out.println("Redução de CO2: " + reducaoCo2 + " toneladas");
+    }
+
+    private RelatorioImpacto gerarRelatorioImpacto() {
+        return new RelatorioImpacto();
     }
 }
