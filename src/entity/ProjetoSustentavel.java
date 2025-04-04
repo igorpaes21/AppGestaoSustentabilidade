@@ -75,6 +75,8 @@ public abstract class ProjetoSustentavel implements ImpactoAmbiental {
         gerarRelatorioImpacto(arvoresPlantadas, reducaoCo2);
     }
 
+    public abstract RelatorioImpacto getRelatorioImpacto(int arvoresPlantadas, double reducaoCo2);
+
     @Override
     public String toString() {
         StringBuilder voluntariosNomes = new StringBuilder();

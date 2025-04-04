@@ -4,13 +4,13 @@ import interfaces.ImpactoAmbiental;
 
 import java.util.ArrayList;
 
-public class ProjetoEnergiaRenovavel extends ProjetoSustentavel{
+public class ProjetoEnergiaRenovavel extends ProjetoSustentavel {
     private double energiaGerada;
 
-   public ProjetoEnergiaRenovavel(){
+    public ProjetoEnergiaRenovavel() {
     }
 
-    public ProjetoEnergiaRenovavel(String  nome, String  descricao, Double energiaGerada) {
+    public ProjetoEnergiaRenovavel(String nome, String descricao, Double energiaGerada) {
         super(nome, descricao);
         this.energiaGerada = energiaGerada;
     }
@@ -31,7 +31,7 @@ public class ProjetoEnergiaRenovavel extends ProjetoSustentavel{
     }
 
     @Override
-    public void calcularImpacto( int arvoresPlantadas, double reducaoCo2) {
+    public void calcularImpacto(int arvoresPlantadas, double reducaoCo2) {
         reducaoCo2 = energiaGerada * 0.5;
         getRelatorioImpacto().setArvoresPlantadas(arvoresPlantadas);
         getRelatorioImpacto().setReducaoCo2(reducaoCo2);
@@ -42,4 +42,17 @@ public class ProjetoEnergiaRenovavel extends ProjetoSustentavel{
 
     }
 
+    @Override
+    public RelatorioImpacto getRelatorioImpacto(int arvoresPlantadas, double reducaoCo2) {
+        RelatorioImpacto relatorio = new RelatorioImpacto();
+        relatorio.setArvoresPlantadas(arvoresPlantadas);
+        relatorio.setReducaoCo2(reducaoCo2);
+        return relatorio;
+    }
+
+    @Override
+    public RelatorioImpacto getRelatorioImpacto() {
+        return new RelatorioImpacto();
+
+    }
 }

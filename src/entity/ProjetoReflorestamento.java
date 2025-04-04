@@ -2,10 +2,11 @@ package entity;
 
 import java.util.ArrayList;
 
-public class ProjetoReflorestamento extends ProjetoSustentavel{
-   private int arvoresPlantadas;
+public class ProjetoReflorestamento extends ProjetoSustentavel {
+    private int arvoresPlantadas;
 
-    public ProjetoReflorestamento() {}
+    public ProjetoReflorestamento() {
+    }
 
     public ProjetoReflorestamento(String nome, String descricao, int arvoresPlantadas) {
         super(nome, descricao);
@@ -21,7 +22,7 @@ public class ProjetoReflorestamento extends ProjetoSustentavel{
     }
 
     @Override
-    public void calcularImpacto( int arvoresPlantadas, double reducaoCo2) {
+    public void calcularImpacto(int arvoresPlantadas, double reducaoCo2) {
         reducaoCo2 = arvoresPlantadas * 0.5;
         gerarRelatorioImpacto().setArvoresPlantadas(arvoresPlantadas);
         gerarRelatorioImpacto().setReducaoCo2(reducaoCo2);
@@ -31,6 +32,16 @@ public class ProjetoReflorestamento extends ProjetoSustentavel{
     }
 
     private RelatorioImpacto gerarRelatorioImpacto() {
+        RelatorioImpacto relatorio = new RelatorioImpacto();
+        relatorio.setArvoresPlantadas(arvoresPlantadas);
+        relatorio.setReducaoCo2(arvoresPlantadas * 0.5);
+        return relatorio;
+    }
+
+    @Override
+    public RelatorioImpacto getRelatorioImpacto(int arvoresPlantadas, double reducaoCo2) {
         return new RelatorioImpacto();
     }
+
 }
+
