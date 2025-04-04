@@ -1,5 +1,9 @@
+import database.DatabaseConnection;
 import entity.*;
 
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.InputMismatchException;
 import java.util.List;
@@ -47,9 +51,23 @@ public class AppGestaoSustentabilidade {
                                 Empresa novaEmpresa = new Empresa(nomeEspresa, cnpj);
                                 organizacoes.add(novaEmpresa);
 
-                                System.out.println("Empresa cadastrado com sucesso!\n" +
-                                        "Tecle ENTER para continuar...");
+                                try (Connection connection = DatabaseConnection.getConnection()) {
+                                    String sql = "INSERT INTO empresa (nome, cnpj) VALUES (?, ?)";
+                                    try (PreparedStatement stmt = connection.prepareStatement(sql)) {
+                                        String nomeEmpresa = "";
+                                        stmt.setString(1, nomeEmpresa);
+                                        stmt.setString(2, cnpj);
+                                        stmt.executeUpdate();
+                                    } catch (SQLException e) {
+                                        throw new RuntimeException(e);
+                                    }
+                                    System.out.println("Empresa cadastrada com sucesso no banco de dados!\n" +
+                                            "Tecle ENTER para continuar...");
+                                } catch (SQLException e) {
+                                    System.err.println("Erro ao conectar ao banco de dados: " + e.getMessage());
+                                }
                                 scan.nextLine();
+
                                 break;
                             case 2:
                                 System.out.println("Nome: ");
@@ -58,9 +76,22 @@ public class AppGestaoSustentabilidade {
                                 Ong novaOng = new Ong(nomeOng);
                                 organizacoes.add(novaOng);
 
-                                System.out.println("Ong cadastrada com sucesso!\n" +
-                                        "Tecle ENTER para continuar...");
+                                try (Connection connection = DatabaseConnection.getConnection()) {
+                                    String sql = "INSERT INTO ong (nome) VALUES (?)";
+                                    try (PreparedStatement stmt = connection.prepareStatement(sql)) {
+                                        String nomeOng1 = "";
+                                        stmt.setString(1, nomeOng1);
+                                        stmt.executeUpdate();
+                                    } catch (SQLException e) {
+                                        throw new RuntimeException(e);
+                                    }
+                                    System.out.println("ONG cadastrada com sucesso no banco de dados!\n" +
+                                            "Tecle ENTER para continuar...");
+                                } catch (SQLException e) {
+                                    System.err.println("Erro ao conectar ao banco de dados: " + e.getMessage());
+                                }
                                 scan.nextLine();
+
                                 break;
                             case 3:
                                 System.out.println("ESCOLHA O TIPO DE PROJETO\n" +
